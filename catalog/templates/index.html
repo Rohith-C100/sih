@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="card-body">
+  <h5 class="card-title">Job Portal Home</h5>
+  <p>Welcome to Portal, a website developed by <em>Rohith and Sagar</em>!</p>
+  <p>The Portal currently has the following record counts:</p>
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Jobs:</strong> {{ num_jobs }}</li>
+    <li class="list-group-item"><strong>Total number of jobs:</strong> {{ num_instances }}</li>
+    <li class="list-group-item"><strong>jobs available:</strong> {{ num_instances_available }}</li>
+    <li class="list-group-item"><strong>Companies:</strong> {{ num_companies }}</li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="card-body">
+  <h5 class="card-title">{{ company.name }}</h5>
+
+  <p><strong>Date of est:</strong> {{ company.date_of_est }}</p>
+  <p><strong>Founder:</strong> {{ company.founder_name }}</p>
+  
+  <div style="margin-left:20px;margin-top:20px">
+    <h6>Jobs</h6>
+
+    {% for job in company.job_set.all %}
+        <hr>
+        <a class="btn btn-primary" href="{{ job.get_absolute_url }}">{{ job.title }}</a>
+    {% endfor %}
+  </div>
+<div>
+{% endblock %}

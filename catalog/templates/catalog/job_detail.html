@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+ <div class="card-body">
+  <h5 class="card-title">Title: {{ job.title }}</h5>
+
+  <p><strong>Company:</strong> <a class="btn btn-primary" href="{{job.company.get_absolute_url}}">{{ job.company }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Description:</strong> {{ job.description }}</p>
+  <p><strong>Skills required:</strong> {{ job.skill.all|join:", " }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h6>JOBS</h6>
+
+    {% for jobinst in job.jobinstance_set.all %}
+      <hr>
+      <p class="{% if jobinst.status == 'a' %}text-success{% elif jobinst.status == 'o' %}text-danger{% else %}text-warning{% endif %}">
+        {{ jobinst.get_status_display }}
+      </p>
+      {% if jobinst.status == 'a' %}
+        <p><strong>last date:</strong> {{ jobinst.last_date }}</p>
+      {% endif %}
+      <p><strong>Location:</strong> {{ jobinst.location }}</p>
+      <p class="text-muted"><strong>Id:</strong> {{ jobinst.id }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
