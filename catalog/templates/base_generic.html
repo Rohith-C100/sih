@@ -17,6 +17,10 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'colleges' %}">All Colleges</a></li>
+            <li class="nav-item"><a class="nav-link" href="http://localhost:8000/admin/">Admin Login</a></li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next={{request.path}}">LogOut</a></li>
+            {% endif %}
           </ul>
     </div>
   </nav>

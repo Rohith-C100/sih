@@ -2,9 +2,6 @@ from django.db import models
 from django.urls import reverse
 import uuid
 
-
-
-
 class Lecturer(models.Model):
     name=models.CharField(max_length=100)
     college=models.ForeignKey('College',on_delete=models.CASCADE,null=True)
