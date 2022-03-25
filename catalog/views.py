@@ -1,3 +1,8 @@
+#     from django.shortcuts import render, get_object_or_404
+# from django.http import HttpResponseRedirect
+# from django.urls import reverse
+from django.contrib.auth.models import User
+# from typing_extensions import Required
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
@@ -5,6 +10,10 @@ from catalog.forms import Lfeedback,Cfeedback
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from catalog.forms import sign_up_form
+
 
 # Create your views here.
 from catalog.models import Lecturer,LecturerFeedback,College,CollegeFeedback, Lrating,Crating
@@ -36,7 +45,8 @@ class CollegeListView(generic.ListView):
     model = College
     paginate_by=10
 
-class CollegeDetailView(generic.DetailView):
+# @login_required
+class CollegeDetailView(LoginRequiredMixin, generic.DetailView):
     model= College
 
 
@@ -121,3 +131,32 @@ def feedback_college(request, pk):
 
 def Thanku(request):
     return HttpResponse("Thank you for your feedback")
+
+
+
+
+def signup(request):
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = sign_up_form(request.POST)
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            user = User.objects.create_user(form.cleaned_data['first_name'],form.cleaned_data['email_id'], form.cleaned_data['password'])
+            user.last_name = form.cleaned_data['last_name']
+            user.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('index') )
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = sign_up_form()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'signup.html', context)
