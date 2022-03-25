@@ -2,69 +2,85 @@ from django.db import models
 from django.urls import reverse
 import uuid
 
-# Create your models here.
-class Skill(models.Model):
-    name=models.CharField(max_length=200,help_text='Enter a skill (e.g. Web development)')
 
+
+
+class Lecturer(models.Model):
+    name=models.CharField(max_length=100)
+    college=models.ForeignKey('College',on_delete=models.CASCADE,null=True)
+    qualification=models.TextField(max_length=1000,help_text='Enter the qualification of lecturer')
+    rating=models.DecimalField(max_digits=2, decimal_places=1)
+    district=models.CharField(max_length=100)
+    state=models.CharField(max_length=100)
+    department=models.CharField(max_length=100)
+    email=models.CharField(max_length=100)
+    student_passing_percentage=models.DecimalField(max_digits=3, decimal_places=2,null=True)
+    percentage_of_student_above_60=models.DecimalField(max_digits=3, decimal_places=2,null=True)
     def __str__(self):
-        return self.name
-
-class Job(models.Model):
-    title=models.CharField(max_length=200)
-    company=models.ForeignKey('Company',on_delete=models.CASCADE,null=True)
-    description=models.TextField(max_length=1000,help_text='Enter a breif description of the job')
-    skills=models.ManyToManyField(Skill,help_text='Select skills required for the job')
-
-    def __str__(self):
-        return f'{self.title} ({self.company})'
+        return f'{self.name} ({self.college})'
 
     def get_absolute_url(self):
-        return reverse('job-detail',args=[str(self.id)])
-    def display_skill(self):
-        """Create a string for the Skill. This is required to display skill in Admin."""
-        return ', '.join(skill.name for skill in self.skills.all()[:3])
-
-    display_skill.short_description = 'Skill'
+        return reverse('lecturer-detail',args=[str(self.id)])
 
     
-class JobInstance(models.Model):
-    id=models.UUIDField(primary_key=True,default=uuid.uuid4,help_text='Unique ID for this particular book across whole library')
-    job=models.ForeignKey('Job',on_delete=models.RESTRICT,null=True)
-    location=models.CharField(max_length=200)
-    last_date=models.DateField(null=True,blank=True)
-
-    JOB_STATUS=(
-        ('o','Occupied'),
-        ('a','Available'),
-        ('r','Reserved'),
-    )
-
-    status=models.CharField(
-        max_length=1,
-        choices=JOB_STATUS,
-        blank=True,
-        default='o',
-        help_text='Job availability',
-    )
-
-    class Meta:
-        ordering=['last_date']
-
+class LecturerFeedback(models.Model):
+    lecturer=models.ForeignKey('Lecturer',on_delete=models.RESTRICT,null=True)
+    one=models.CharField(max_length=200,null=True)
+    two=models.CharField(max_length=200,null=True)
+    three=models.CharField(max_length=200,null=True)
+    four=models.CharField(max_length=200,null=True)
+    w1=models.IntegerField(default=0,null=True)
+    w2=models.IntegerField(default=0,null=True)
+    w3=models.IntegerField(default=0,null=True)
+    w4=models.IntegerField(default=0,null=True)
     def __str__(self):
-        return f'{self.id} ({self.job.title})'
+        return f'{self.id} ({self.lecturer.name})'
 
 
-class Company(models.Model):
+class College(models.Model):
     name=models.CharField(max_length=100)
-    founder_name=models.CharField(max_length=100)
-    date_of_est=models.DateField(null=True,blank=True)
+    rating=models.DecimalField(max_digits=2, decimal_places=1)
+    district=models.CharField(max_length=100)
+    state=models.CharField(max_length=100)
+    student_passing_percentage=models.DecimalField(max_digits=3, decimal_places=2,null=True)
+    percentage_of_student_above_60=models.DecimalField(max_digits=3, decimal_places=2,null=True)
 
-    class Meta:
-        ordering=['name','founder_name']
+    # class Meta:
+    #     ordering=['name','founder_name']
 
     def get_absolute_url(self):
-        return reverse("company-detail", args=[str(self.id)])
+        return reverse("college-detail", args=[str(self.id)])
 
     def __str__(self):
         return f'{self.name}'
     
+class CollegeFeedback(models.Model):
+    college=models.ForeignKey('College',on_delete=models.RESTRICT,null=True)
+    one=models.CharField(max_length=200,null=True)
+    two=models.CharField(max_length=200,null=True)
+    three=models.CharField(max_length=200,null=True)
+    four=models.CharField(max_length=200,null=True)
+    w1=models.IntegerField(default=0,null=True)
+    w2=models.IntegerField(default=0,null=True)
+    w3=models.IntegerField(default=0,null=True)
+    w4=models.IntegerField(default=0,null=True)
+    def __str__(self):
+        return f'{self.id} ({self.college.name})'
+
+class Lrating(models.Model):
+    lecturer=models.ForeignKey('Lecturer',on_delete=models.RESTRICT,null=True)
+    form=models.ForeignKey('LecturerFeedback',on_delete=models.RESTRICT,null=True)
+    r1=models.IntegerField(default=0,null=True)
+    r2=models.IntegerField(default=0,null=True)
+    r3=models.IntegerField(default=0,null=True)
+    r4=models.IntegerField(default=0,null=True)
+    total=models.DecimalField(max_digits=5,decimal_places=2,null=True)
+
+class Crating(models.Model):
+    college=models.ForeignKey('College',on_delete=models.RESTRICT,null=True)
+    form=models.ForeignKey('CollegeFeedback',on_delete=models.RESTRICT,null=True)
+    r1=models.IntegerField(default=0,null=True)
+    r2=models.IntegerField(default=0,null=True)
+    r3=models.IntegerField(default=0,null=True)
+    r4=models.IntegerField(default=0,null=True)
+    total=models.DecimalField(max_digits=5,decimal_places=2,null=True)

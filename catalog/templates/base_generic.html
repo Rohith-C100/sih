@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Job Portal</title>{% endblock %}
+  {% block title %}<title>Feedback System</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,11 +13,10 @@
   {% block navbar %}
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid custom-font-navbar">
-        <a class="navbar-brand" href="">Jobs Portal</a>
+        <a class="navbar-brand" href="">Feedback System</a>
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'jobs' %}">All Jobs</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'companies' %}">All Companies</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'colleges' %}">All Colleges</a></li>
           </ul>
     </div>
   </nav>

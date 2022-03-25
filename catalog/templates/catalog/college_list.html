@@ -3,16 +3,16 @@
 {% block content %}
  <div class="card-body">
   <h5 class="card-title">Company List</h1>
-  {% if company_list %}
+  {% if college_list %}
   <ul class="list-group">
-    {% for company in company_list %}
+    {% for college in college_list %}
       <li class="list-group-item">
-        <a class="btn btn-primary" href="{{ company.get_absolute_url }}">{{ company.name }}</a>
+        <a class="btn btn-primary" href="{{ college.get_absolute_url }}">{{ college.name }}</a>
       </li>
     {% endfor %}
   </ul>
   {% else %}
-    <p>There are no companies.</p>
+    <p>There are no colleges.</p>
   {% endif %}
  <div>
 {% endblock %}

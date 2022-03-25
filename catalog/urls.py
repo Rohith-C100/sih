@@ -3,9 +3,14 @@ from . import views
 
 urlpatterns = [
     path('',views.index,name='index'),
-    path('jobs/', views.JobListView.as_view(), name='jobs'),
-    path('job/<int:pk>', views.JobDetailView.as_view(), name='job-detail'),
-    path('companies/',views.CompanyListView.as_view(),name='companies'),
-    path('company/<int:pk>',views.CompanyDetailView.as_view(),name='company-detail')
+    path('lecturer/<int:pk>', views.LecturerDetailView.as_view(), name='lecturer-detail'),
+    path('colleges/',views.CollegeListView.as_view(),name='colleges'),
+    path('college/<int:pk>',views.CollegeDetailView.as_view(),name='college-detail')
 ]
 
+
+urlpatterns += [
+    path('lecturer/<int:pk>/feedback/', views.feedback_lecturer, name='feedback-to-lecturer'),
+    path('college/<int:pk>/feedback/', views.feedback_college, name='feedback-to-college'),
+    path('thankyou',views.Thanku,name='thanku')
+]

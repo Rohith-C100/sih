@@ -2,14 +2,14 @@
 
 {% block content %}
  <div class="card-body">
-  <h5 class="card-title">Title: {{ job.title }}</h5>
+  <h5 class="card-title">Title: {{ lecturer.name }}</h5>
 
-  <p><strong>Company:</strong> <a class="btn btn-primary" href="{{job.company.get_absolute_url}}">{{ job.company }}</a></p> <!-- author detail link not yet defined -->
-  <p><strong>Description:</strong> {{ job.description }}</p>
-  <p><strong>Skills required:</strong> {{ job.skill.all|join:", " }}</p>
+  <p><strong>College:</strong> <a class="btn btn-primary" href="{{lecturer.college.get_absolute_url}}">{{ lecturer.college }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Department:</strong> {{ lecturer.department }}</p>
+  <p><strong>Rating:</strong> {{ lecturer.rating }}</p>
 
-  <div style="margin-left:20px;margin-top:20px">
-    <h6>JOBS</h6>
+  {% comment %} <div style="margin-left:20px;margin-top:20px">
+    <h6>Lecturers</h6>
 
     {% for jobinst in job.jobinstance_set.all %}
       <hr>
@@ -22,6 +22,7 @@
       <p><strong>Location:</strong> {{ jobinst.location }}</p>
       <p class="text-muted"><strong>Id:</strong> {{ jobinst.id }}</p>
     {% endfor %}
-  </div>
+  </div> {% endcomment %}
+  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-lecturer' pk=lecturer.id %}">click here</a></p> 
 </div>
 {% endblock %}

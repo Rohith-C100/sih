@@ -5,17 +5,12 @@
 }
 
 .card{
-    background: rgb(238,174,202);
-    background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(0,255,248,1) 100%);
     text-align: center;
     height:100%;
 }
 
 .custom-font-navbar{
-    color: white;
-    text-decoration: underline;
-		font-style: italic;
-		font-size: 1.5em;
-        background: rgb(238,174,202);
-background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(209,0,255,1) 100%);
+    color: black;
+	font-style: bold;
+	font-size: 1.5em;
 }
