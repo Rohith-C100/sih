@@ -36,3 +36,24 @@ class Cfeedback(forms.Form):
     two = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.two)
     three = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.three)
     four = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.four)
+
+
+
+class sign_up_form(forms.Form):
+    first_name=forms.CharField(strip=True,min_length=2,required=True)
+    last_name=forms.CharField(strip=True,min_length=2,required=True)
+    email_id=forms.EmailField(required=True)
+    password = forms.CharField(widget=forms.PasswordInput)
+    re_enter_password=forms.CharField(widget=forms.PasswordInput)
+    
+    def clean(self):
+        cleaned_data=super().clean()
+        password=cleaned_data.get("password")
+        re_entered_password=cleaned_data.get("re_enter_password")
+
+        if(password!=re_entered_password):
+            raise ValidationError(
+                "Enter the correct password for both the fields."
+            )
+        # else:
+        #     return cleaned_data
