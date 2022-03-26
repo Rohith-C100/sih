@@ -17,7 +17,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'colleges' %}">All Colleges</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost:8000/admin/">Admin Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="http://localhost:8000/admin/">Admin</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'filter' %}">Search</a></li>
             {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next={{request.path}}">LogOut</a></li>
