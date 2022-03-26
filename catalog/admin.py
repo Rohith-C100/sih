@@ -3,7 +3,6 @@ from django.contrib import admin
 # Register your models here.
 from catalog.models import Lecturer,College,LecturerFeedback,CollegeFeedback,Lrating,Crating
 admin.site.register(Lecturer)
-admin.site.register(College)
 admin.site.register(LecturerFeedback)
 admin.site.register(CollegeFeedback)
 admin.site.register(Lrating)
@@ -27,3 +26,7 @@ admin.site.register(Crating)
 # class JobInstanceAdmin(admin.ModelAdmin):
 #     list_display = ('job','status','location','last_date','id')
 #     list_filter = ('status', 'last_date')
+@admin.register(College)
+class JobInstanceAdmin(admin.ModelAdmin):
+    list_filter = ('state', 'district')
+    list_display = ('name','rating','district','state')

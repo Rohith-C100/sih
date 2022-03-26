@@ -35,8 +35,8 @@
         <td>{{ form.password }}</td>
       </tr> -->
       <div style="padding: 1%;padding-left: 6%;">
-    <input type="submit" value="login" class="btn btn-primary" />
-    <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a>
+    <input type="submit" value="Login" class="btn btn-primary" />
+    {% comment %} <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a> {% endcomment %}
     <input type="hidden" name="next" value="{{ next }}" />
     </div>
   </form>

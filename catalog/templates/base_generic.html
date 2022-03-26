@@ -64,9 +64,13 @@
           <li><a class="nav-link scrollto " href="{% url 'index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'colleges' %}">Colleges</a></li>
           <li><a class="nav-link scrollto" href="http://localhost:8000/admin/">Admin</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'filter' %}">Search</a></li>
           {% if user.is_authenticated %}
             <li><a class="nav-link scrollto" href="{% url 'logout' %}?next={{request.path}}">LogOut</a></li>
             {% endif %}
+          {% if not user.is_authenticated %}
+          <li><a class="nav-link scrollto" href="{% url 'login' %}?next={{request.path}}">LogIn</a></li>
+          {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<div style="padding-top:7%">
   <h1>Feedback for: {{ college_instance.name }}</h1>
   <form action="" method="post">
     {% csrf_token %}
@@ -9,4 +10,5 @@
     </table>
     <input type="submit" value="Submit">
   </form>
+</div>
 {% endblock %}
