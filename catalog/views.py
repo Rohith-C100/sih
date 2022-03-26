@@ -16,6 +16,7 @@ from catalog.forms import sign_up_form
 from catalog.forms import filter_form
 from django.db.models import Avg
 from catalog.models import Lecturer,LecturerFeedback,College,CollegeFeedback, Lrating,Crating
+from django.contrib.auth.models import Group
 
 # Create your views here.
 
@@ -148,9 +149,15 @@ def signup(request):
             user = User.objects.create_user(form.cleaned_data['first_name'],form.cleaned_data['email_id'], form.cleaned_data['password'])
             user.last_name = form.cleaned_data['last_name']
             user.save()
-
+            role=form.cleaned_data['role']
+            if (role=="student"):
+                my_group = Group.objects.get(name='student') 
+                my_group.user_set.add(user)
+            else:
+                my_group = Group.objects.get(name='parent') 
+                my_group.user_set.add(user)
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('index') )
+            return HttpResponseRedirect(reverse('login') )
 
     # If this is a GET (or any other method) create the default form.
     else:

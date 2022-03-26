@@ -3,10 +3,13 @@
 {% block content %}
  <div class="card-body">
   <h5 class="card-title">Title: {{ lecturer.name }}</h5>
-
   <p><strong>College:</strong> <a class="btn btn-primary" href="{{lecturer.college.get_absolute_url}}">{{ lecturer.college }}</a></p> <!-- author detail link not yet defined -->
   <p><strong>Department:</strong> {{ lecturer.department }}</p>
   <p><strong>Rating:</strong> {{ lecturer.rating }}</p>
+  <p><strong>Region:</strong> {{ lecturer.state }}</p>
+  <p><strong>District:</strong> {{ lecturer.district}}</p>
+  <p><strong>email:</strong> {{ lecturer.email}}</p>
+  <p><strong>Qualification:</strong> {{ lecturer.qualification}}</p>
 
   {% comment %} <div style="margin-left:20px;margin-top:20px">
     <h6>Lecturers</h6>

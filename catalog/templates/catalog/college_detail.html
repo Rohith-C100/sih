@@ -3,12 +3,15 @@
 {% block content %}
 <div class="card-body">
   <h5 class="card-title">{{ college.name }}</h5>
+  <p><strong>Rating:</strong> {{ college.rating }}</p>
+  <p><strong>State:</strong> {{ college.state }}</p>
+  <p><strong>District:</strong> {{ college.district }}</p>
+  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-college' pk=college.id %}">click here</a></p> 
   <div style="margin-left:20px;margin-top:20px">
     {% for lecturer in college.lecturer_set.all %}
         <hr>
         <a class="btn btn-primary" href="{{ lecturer.get_absolute_url }}">{{ lecturer.name }}</a>
     {% endfor %}
   </div>
-  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-college' pk=college.id %}">click here</a></p> 
 <div>
 {% endblock %}

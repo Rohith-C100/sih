@@ -1,3 +1,4 @@
+from random import choices
 from sre_parse import State
 from django import forms
 from django.core.exceptions import ValidationError
@@ -46,6 +47,8 @@ class sign_up_form(forms.Form):
     email_id=forms.EmailField(required=True)
     password = forms.CharField(widget=forms.PasswordInput)
     re_enter_password=forms.CharField(widget=forms.PasswordInput)
+    role_choice = (("student", "student"), ("parent", "parent"))
+    role=forms.ChoiceField(choices=role_choice)
     # role = forms.ChoiceField(, choices=[CHOICES], required=False)
     def clean(self):
         cleaned_data=super().clean()
