@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
+<div style="padding-top: 9%; text-align: center;">
   <h3>Filter</h3>
   <form action="" method="post">
     {% csrf_token %}
@@ -8,4 +9,5 @@
     </table>
     <input type="submit" value="Submit">
   </form>
+</div>
 {% endblock %}
