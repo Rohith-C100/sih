@@ -10,7 +10,7 @@ from catalog.forms import Lfeedback,Cfeedback
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import sign_up_form
 
@@ -45,12 +45,12 @@ class CollegeListView(generic.ListView):
     model = College
     paginate_by=10
 
-# @login_required
-class CollegeDetailView(LoginRequiredMixin, generic.DetailView):
+
+class CollegeDetailView(generic.DetailView):
     model= College
 
 
-
+@login_required
 def feedback_lecturer(request, pk):
     lecturer = get_object_or_404(Lecturer, pk=pk)
     feedbackform=LecturerFeedback.objects.get(id=1)
@@ -90,7 +90,7 @@ def feedback_lecturer(request, pk):
 
     return render(request, 'catalog/lecturer_feedback_form.html', context)
 
-
+@login_required
 def feedback_college(request, pk):
     college = get_object_or_404(College, pk=pk)
     feedbackform=CollegeFeedback.objects.get(id=1)
