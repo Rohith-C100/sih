@@ -7,7 +7,8 @@ urlpatterns = [
     path('filter', views.filter, name='filter'),
     path('lecturer/<int:pk>', views.LecturerDetailView.as_view(), name='lecturer-detail'),
     path('colleges/',views.CollegeListView.as_view(),name='colleges'),
-    path('college/<int:pk>',views.CollegeDetailView.as_view(),name='college-detail')
+    path('college/<int:pk>',views.CollegeDetailView.as_view(),name='college-detail'),
+    path('pie-chart/<int:pk>', views.pie_chart, name='pie-chart'),
 
 ]
 

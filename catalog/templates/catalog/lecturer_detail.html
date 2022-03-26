@@ -23,6 +23,8 @@
       <p class="text-muted"><strong>Id:</strong> {{ jobinst.id }}</p>
     {% endfor %}
   </div> {% endcomment %}
-  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-lecturer' pk=lecturer.id %}">click here</a></p> 
+  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-lecturer' pk=lecturer.id %}">click here</a></p>
+  <br>
+  <p><a class="btn btn-primary" href="{% url 'pie-chart' pk=lecturer.id %}">Show chart</a></p> 
 </div>
 {% endblock %}
