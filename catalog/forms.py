@@ -1,3 +1,4 @@
+from sre_parse import State
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -57,3 +58,26 @@ class sign_up_form(forms.Form):
             )
         # else:
         #     return cleaned_data
+
+
+class filter_form(forms.Form):
+    STATE_CHOICES = (("Andhra Pradesh","Andhra Pradesh"),("Arunachal Pradesh ","Arunachal Pradesh "),("Assam","Assam"),("Bihar","Bihar"),("Chhattisgarh","Chhattisgarh"),("Goa","Goa"),("Gujarat","Gujarat"),("Haryana","Haryana"),("Himachal Pradesh","Himachal Pradesh"),("Jammu and Kashmir ","Jammu and Kashmir "),("Jharkhand","Jharkhand"),("Karnataka","Karnataka"),("Kerala","Kerala"),("Madhya Pradesh","Madhya Pradesh"),("Maharashtra","Maharashtra"),("Manipur","Manipur"),("Meghalaya","Meghalaya"),("Mizoram","Mizoram"),("Nagaland","Nagaland"),("Odisha","Odisha"),("Punjab","Punjab"),("Rajasthan","Rajasthan"),("Sikkim","Sikkim"),("Tamil Nadu","Tamil Nadu"),("Telangana","Telangana"),("Tripura","Tripura"),("Uttar Pradesh","Uttar Pradesh"),("Uttarakhand","Uttarakhand"),("West Bengal","West Bengal"),("Andaman and Nicobar Islands","Andaman and Nicobar Islands"),("Chandigarh","Chandigarh"),("Dadra and Nagar Haveli","Dadra and Nagar Haveli"),("Daman and Diu","Daman and Diu"),("Lakshadweep","Lakshadweep"),("National Capital Territory of Delhi","National Capital Territory of Delhi"),("Puducherry","Puducherry"))
+    DISTRICT_CHOICES = (("Tumkur", "Tumkur"), ("Banglore", "Banglore"))
+    state=forms.ChoiceField(choices = STATE_CHOICES)
+    district=forms.ChoiceField(choices = DISTRICT_CHOICES)
+  
+# creating a form 
+# class GeeksForm(forms.Form):
+#     geeks_field = forms.ChoiceField(choices = GEEKS_CHOICES)
+    # def clean(self):
+    #     cleaned_data=super().clean()
+    #     password=cleaned_data.get("password")
+    #     re_entered_password=cleaned_data.get("re_enter_password")
+
+    #     if(password!=re_entered_password):
+    #         raise ValidationError(
+    #             "Enter the correct password for both the fields."
+    #         )
+        # else:
+        #     return cleaned_data
+

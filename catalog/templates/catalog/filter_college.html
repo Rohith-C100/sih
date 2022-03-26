@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+ <div class="card-body">
+  <h5 class="card-title">Company List</h1>
+  {% if filter_college_list %}
+  <ul class="list-group">
+    {% for college in filter_college_list %}
+      <li class="list-group-item">
+        <a class="btn btn-primary" href="{{ college.get_absolute_url }}">{{ college.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no colleges.</p>
+  {% endif %}
+ <div>
+{% endblock %}
