@@ -14,11 +14,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import sign_up_form
 from catalog.forms import filter_form
-# from catalog.models import Lecturer,College,LecturerFeedback,CollegeFeedback,Lrating,Crating
-
+from django.db.models import Avg
+from catalog.models import Lecturer,LecturerFeedback,College,CollegeFeedback, Lrating,Crating
 
 # Create your views here.
-from catalog.models import Lecturer,LecturerFeedback,College,CollegeFeedback, Lrating,Crating
 
 def index(request):
     """View function for home page of site."""
@@ -191,3 +190,40 @@ def filter(request):
     }
 
     return render(request, 'filter.html', context)
+
+
+def pie_chart(request, pk):
+    
+    labels = []
+    data = []
+
+    queryset = Lecturer.objects.order_by('rating')
+    # for city in queryset:
+    #     labels.append(city.name)
+    #     data.append(city.population)
+    l = LecturerFeedback.objects.get(id = 1)
+    labels.append(l.one)
+    labels.append(l.two)
+    labels.append(l.three)
+    labels.append(l.four)
+    lec = Lecturer.objects.get(id = pk)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r1'))['r1__avg'] * l.w1)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r2'))['r2__avg']* l.w2)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r3'))['r3__avg']* l.w3)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r4'))['r4__avg']* l.w4)
+    # for d in data:
+    #     print(d)
+    # for lab in l:
+    #     temp.append(lab.w1)
+    
+    backgroundColor= [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(255, 105, 86)']
+
+    return render(request, 'catalog/pie_chart.html', {
+        'labels': labels,
+        'data': data,
+        'backgroundColor': backgroundColor,
+    })

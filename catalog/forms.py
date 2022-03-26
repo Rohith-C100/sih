@@ -46,7 +46,7 @@ class sign_up_form(forms.Form):
     email_id=forms.EmailField(required=True)
     password = forms.CharField(widget=forms.PasswordInput)
     re_enter_password=forms.CharField(widget=forms.PasswordInput)
-    
+    # role = forms.ChoiceField(, choices=[CHOICES], required=False)
     def clean(self):
         cleaned_data=super().clean()
         password=cleaned_data.get("password")
