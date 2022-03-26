@@ -1,10 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
- <div class="card-body">
-  <h5 class="card-title">Company List</h1>
+ <div class="card-body" style="padding-top: 9%; text-align: center;">
+  <h5 class="card-title" style="font-weight: 800;font-size: 40px;">UNIVERSITIES</h1>
   {% if college_list %}
-  <ul class="list-group">
+  <ul class="list-group" style="padding: 2%;">
     {% for college in college_list %}
       <li class="list-group-item">
         <a class="btn btn-primary" href="{{ college.get_absolute_url }}">{{ college.name }}</a>

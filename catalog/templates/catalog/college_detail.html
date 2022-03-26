@@ -1,14 +1,16 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class="card-body">
-  <h5 class="card-title">{{ college.name }}</h5>
+<div class="card-body" style="padding-top: 8%; text-align: center;">
+  <h5 class="card-title" style="font-size: 40px;">{{ college.name }}</h5>
+  <p style="margin: 3%;">Submit your feedback for the university <a class="btn btn-light" href="{% url 'feedback-to-college' pk=college.id %}">Here</a></p> 
   <div style="margin-left:20px;margin-top:20px">
+    <h4 style="text-align: center;">University Faculty</h4>
     {% for lecturer in college.lecturer_set.all %}
         <hr>
         <a class="btn btn-primary" href="{{ lecturer.get_absolute_url }}">{{ lecturer.name }}</a>
     {% endfor %}
   </div>
-  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-college' pk=college.id %}">click here</a></p> 
+  
 <div>
 {% endblock %}

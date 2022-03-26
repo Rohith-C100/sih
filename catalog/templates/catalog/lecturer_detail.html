@@ -1,13 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
- <div class="card-body">
-  <h5 class="card-title">Title: {{ lecturer.name }}</h5>
-
+ <div class="card-body" style="padding-top: 9%; text-align: center;">
+  <h5 class="card-title">Faculty name: <span style="font-size:30px;font-weight:600">{{ lecturer.name }}</span></h5>
+  <div style="padding: 2%;">
   <p><strong>College:</strong> <a class="btn btn-primary" href="{{lecturer.college.get_absolute_url}}">{{ lecturer.college }}</a></p> <!-- author detail link not yet defined -->
   <p><strong>Department:</strong> {{ lecturer.department }}</p>
   <p><strong>Rating:</strong> {{ lecturer.rating }}</p>
-
+</div>
   {% comment %} <div style="margin-left:20px;margin-top:20px">
     <h6>Lecturers</h6>
 
@@ -23,6 +23,6 @@
       <p class="text-muted"><strong>Id:</strong> {{ jobinst.id }}</p>
     {% endfor %}
   </div> {% endcomment %}
-  <p><strong>give feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-lecturer' pk=lecturer.id %}">click here</a></p> 
+  <p><strong>Faculty Feedback:</strong> <a class="btn btn-primary" href="{% url 'feedback-to-lecturer' pk=lecturer.id %}">click here</a></p> 
 </div>
 {% endblock %}

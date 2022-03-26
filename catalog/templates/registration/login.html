@@ -15,21 +15,30 @@
     {% endif %}
   {% endif %}
 
-  <form method="post" action="{% url 'login' %}">
+  <form method="post" action="{% url 'login' %}" style="padding-top: 10%; text-align: center;">
     {% csrf_token %}
-    <table>
-      <tr>
+    <h3>Login</h3>
+    <div style="margin-top: 2%;">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+    <div style="margin: 2%;">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+      <!-- <tr style="margin: 2%;">
         <td>{{ form.username.label_tag }}</td>
         <td>{{ form.username }}</td>
       </tr>
-      <tr>
+      <tr style="margin: 2%;">
         <td>{{ form.password.label_tag }}</td>
         <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="login" />
-    <a href="{% url 'signup' %}" >signup</a>
+      </tr> -->
+      <div style="padding: 1%;padding-left: 6%;">
+    <input type="submit" value="login" class="btn btn-primary" />
+    <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a>
     <input type="hidden" name="next" value="{{ next }}" />
+    </div>
   </form>
 <!-- 
   {# Assumes you setup the password_reset view in your URLconf #}
