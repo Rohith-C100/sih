@@ -13,6 +13,8 @@ from django.urls import reverse
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import sign_up_form
+from catalog.forms import filter_form
+# from catalog.models import Lecturer,College,LecturerFeedback,CollegeFeedback,Lrating,Crating
 
 
 # Create your views here.
@@ -160,3 +162,32 @@ def signup(request):
     }
 
     return render(request, 'signup.html', context)
+
+
+
+
+def filter(request):
+# If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+    # Create a form instance and populate it with data from the request (binding):
+        form = filter_form(request.POST)
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            state=form.cleaned_data['state']
+            district=form.cleaned_data['district']
+            filter_college_list = College.objects.filter(district = district).filter(state = state).order_by("-rating") 
+            context = {
+            'filter_college_list': filter_college_list,
+            'form': form
+            }
+        return render(request, 'catalog/filter_college.html', context)  
+    else:
+        form = filter_form()
+
+    context = {
+        # 'filter_college_list': filter_college_list,
+        'form': form
+    }
+
+    return render(request, 'filter.html', context)
