@@ -190,13 +190,14 @@ def filter(request):
         return render(request, 'catalog/filter_college.html', context)  
     else:
         form = filter_form()
-
+        filter_college_list = College.objects.order_by("-rating") 
+           
     context = {
-        # 'filter_college_list': filter_college_list,
+        'filter_college_list': filter_college_list,
         'form': form
     }
 
-    return render(request, 'filter.html', context)
+    return render(request, 'catalog/filter_college.html', context)
 
 
 def pie_chart(request, pk):
