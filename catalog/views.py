@@ -17,7 +17,7 @@ from catalog.forms import filter_form
 from django.db.models import Avg
 from catalog.models import Lecturer,LecturerFeedback,College,CollegeFeedback, Lrating,Crating
 from django.contrib.auth.models import Group
-
+from json import dumps
 # Create your views here.
 
 def index(request):
@@ -215,25 +215,21 @@ def pie_chart(request, pk):
     labels.append(l.three)
     labels.append(l.four)
     lec = Lecturer.objects.get(id = pk)
-    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r1'))['r1__avg'] * l.w1)
-    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r2'))['r2__avg']* l.w2)
-    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r3'))['r3__avg']* l.w3)
-    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r4'))['r4__avg']* l.w4)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r1'))['r1__avg']/5*100)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r2'))['r2__avg']/5*100)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r3'))['r3__avg']/5*100)
+    data.append(Lrating.objects.filter(lecturer = lec).aggregate(Avg('r4'))['r4__avg']/5*100)
     # for d in data:
     #     print(d)
     # for lab in l:
     #     temp.append(lab.w1)
-    
-    backgroundColor= [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)',
-      'rgb(255, 105, 86)']
-
-    return render(request, 'catalog/pie_chart.html', {
+    dict={
         'labels': labels,
         'data': data,
-        'backgroundColor': backgroundColor,
+    }
+    data=dumps(dict)
+    return render(request, 'catalog/pie_chart.html',{
+        'data':data
     })
 
 def Thanku(request):
