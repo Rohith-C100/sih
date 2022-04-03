@@ -26,20 +26,21 @@ from catalog.models import LecturerFeedback,CollegeFeedback
 class Lfeedback(forms.Form):
     questions=LecturerFeedback.objects.get(id=1)
     CHOICES = [('1', 'very poor'), ('2', 'poor'),('3', 'good'),('4', 'very good'),('5', 'excellent')]
-    one =forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.one)
-    two = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.two)
-    three = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.three)
-    four = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.four)
+    one =forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.one)
+    two = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.two)
+    three = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.three)
+    four = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.four)
 
 class Cfeedback(forms.Form):
+
     questions=CollegeFeedback.objects.get(id=1)
     CHOICES = [('1', 'very poor'), ('2', 'poor'),('3', 'good'),('4', 'very good'),('5', 'excellent')]
-    one =forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.one)
-    two = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.two)
-    three = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.three)
-    four = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES,label=questions.four)
+    one =forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}),choices=CHOICES,label=questions.one)
+    two = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.two)
+    three = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.three)
+    four = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class':'form-check-input'}), choices=CHOICES,label=questions.four)
 
-
+# widget=forms.RadioSelect(attrs={'class':'btn'})
 
 class sign_up_form(forms.Form):
     first_name=forms.CharField(strip=True,min_length=2,required=True)
@@ -66,8 +67,8 @@ class sign_up_form(forms.Form):
 class filter_form(forms.Form):
     STATE_CHOICES = (("Andhra Pradesh","Andhra Pradesh"),("Arunachal Pradesh ","Arunachal Pradesh "),("Assam","Assam"),("Bihar","Bihar"),("Chhattisgarh","Chhattisgarh"),("Goa","Goa"),("Gujarat","Gujarat"),("Haryana","Haryana"),("Himachal Pradesh","Himachal Pradesh"),("Jammu and Kashmir ","Jammu and Kashmir "),("Jharkhand","Jharkhand"),("Karnataka","Karnataka"),("Kerala","Kerala"),("Madhya Pradesh","Madhya Pradesh"),("Maharashtra","Maharashtra"),("Manipur","Manipur"),("Meghalaya","Meghalaya"),("Mizoram","Mizoram"),("Nagaland","Nagaland"),("Odisha","Odisha"),("Punjab","Punjab"),("Rajasthan","Rajasthan"),("Sikkim","Sikkim"),("Tamil Nadu","Tamil Nadu"),("Telangana","Telangana"),("Tripura","Tripura"),("Uttar Pradesh","Uttar Pradesh"),("Uttarakhand","Uttarakhand"),("West Bengal","West Bengal"),("Andaman and Nicobar Islands","Andaman and Nicobar Islands"),("Chandigarh","Chandigarh"),("Dadra and Nagar Haveli","Dadra and Nagar Haveli"),("Daman and Diu","Daman and Diu"),("Lakshadweep","Lakshadweep"),("National Capital Territory of Delhi","National Capital Territory of Delhi"),("Puducherry","Puducherry"))
     DISTRICT_CHOICES = (("Tumkur", "Tumkur"), ("Banglore", "Banglore"))
-    state=forms.ChoiceField(choices = STATE_CHOICES)
-    district=forms.ChoiceField(choices = DISTRICT_CHOICES)
+    state=forms.ChoiceField(widget=forms.Select(attrs={'class':'form-select'}),choices = STATE_CHOICES)
+    district=forms.ChoiceField(widget=forms.Select(attrs={'class':'form-select'}),choices = DISTRICT_CHOICES)
   
 # creating a form 
 # class GeeksForm(forms.Form):

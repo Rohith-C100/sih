@@ -121,7 +121,7 @@ def feedback_college(request, pk):
 
     # If this is a GET (or any other method) create the default form.
     else:
-        form = Lfeedback()
+        form = Cfeedback()
 
     context = {
         'form': form,

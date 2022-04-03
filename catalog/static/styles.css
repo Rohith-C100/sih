@@ -14,3 +14,7 @@
 	font-style: bold;
 	font-size: 1.5em;
 }
+
+.nodots{
+    list-style-type: none;
+}
